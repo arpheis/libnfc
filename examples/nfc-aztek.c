@@ -324,7 +324,9 @@ main(int argc, char *argv[])
     azt00[1] = i;	  
     iso14443a_crc_append(azt00,3);
     if(transmit_bytes(azt00,5)){
+      printf("dump block %02x",i);
       memcpy(abtAts, abtRx, szRx-2);
+      printf("dump block %02x : %16x",i,abtAts);
       fwrite(abtAts,8,1,fdump);
     }
   }
