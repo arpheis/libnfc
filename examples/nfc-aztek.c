@@ -318,7 +318,7 @@ main(int argc, char *argv[])
   }
 
   // Custom READ
-  fdump = fopen(argv[0],"w" ); 
+  fdump = fopen("dump.bin","wb" ); 
 
   for (i=0;i<256;i++){
     azt00[1] = i;	  
