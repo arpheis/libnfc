@@ -80,7 +80,7 @@ uint8_t  abtSelectAll[2] = { 0x93, 0x20 };
 uint8_t  abtSelectTag[9] = { 0x93, 0x70, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 uint8_t  abtRats[4] = { 0xe0, 0x50, 0x00, 0x00 };
 uint8_t  abtHalt[4] = { 0x50, 0x00, 0x00, 0x00 };
-
+uint8_t  bloc[8] = {0x00, 0x00, 0x00, 0x00,0x00, 0x00, 0x00, 0x00};
 // Custom READ
 uint8_t azt00[5]= { 0x10, 0x00, 0x00, 0x00, 0x00 };
 
@@ -163,7 +163,8 @@ int
 main(int argc, char *argv[])
 {
   int     arg;
-
+  FILE * fdump;
+  
   // Get commandline options
   for (arg = 1; arg < argc; arg++) {
     if (0 == strcmp(argv[arg], "-h")) {
@@ -335,12 +336,18 @@ main(int argc, char *argv[])
   }
 
   // Custom READ
-  
+  fdump = fopen(argv[0],"w" ); 
+
   for (i=0;i<256;i++){
-	azt00[1] = i;	  
-	iso14443a_crc_append(azt00,3);
-	transmit_bytes(azt00,5);
+    azt00[1] = i;	  
+    iso14443a_crc_append(azt00,3);
+    if(transmit_bytes(azt00,5)){
+      memcpy(bloc, abtRx, 8);
+      fwrite(bloc,8,1,fdump);
+    }
   }
+
+  fclose(fdump);
   // Done, halt the tag now
   iso14443a_crc_append(abtHalt, 2);
   transmit_bytes(abtHalt, 4);
