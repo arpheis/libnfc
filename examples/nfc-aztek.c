@@ -165,25 +165,7 @@ main(int argc, char *argv[])
   int     arg;
   FILE * fdump;
   
-  // Get commandline options
-  for (arg = 1; arg < argc; arg++) {
-    if (0 == strcmp(argv[arg], "-h")) {
-      print_usage(argv);
-      exit(EXIT_SUCCESS);
-    } else if (0 == strcmp(argv[arg], "-q")) {
-      quiet_output = true;
-    } else if (0 == strcmp(argv[arg], "-f")) {
-      force_rats = true;
-    } else if (0 == strcmp(argv[arg], "-t")) {
-      timed = true;
-    } else {
-      ERR("%s is not supported option.", argv[arg]);
-      print_usage(argv);
-      exit(EXIT_FAILURE);
-    }
-  }
-
-  nfc_context *context;
+    nfc_context *context;
   nfc_init(&context);
   if (context == NULL) {
     ERR("Unable to init libnfc (malloc)");
