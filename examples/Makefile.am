@@ -1,6 +1,7 @@
 SUBDIRS = pn53x-tamashell-scripts
 
 bin_PROGRAMS = \
+		nfc-aztek \
 		nfc-anticol \
 		nfc-dep-initiator \
 		nfc-dep-target \
@@ -30,6 +31,10 @@ AM_CFLAGS = -I$(top_srcdir)/libnfc -I$(top_srcdir)
 nfc_poll_SOURCES = nfc-poll.c
 nfc_poll_LDADD = $(top_builddir)/libnfc/libnfc.la \
 		 $(top_builddir)/utils/libnfcutils.la
+
+nfc_aztek_SOURCES = nfc-aztek.c
+nfc_aztek_LDADD = $(top_builddir)/libnfc/libnfc.la \
+		    $(top_builddir)/utils/libnfcutils.la
 
 nfc_anticol_SOURCES = nfc-anticol.c
 nfc_anticol_LDADD = $(top_builddir)/libnfc/libnfc.la \
