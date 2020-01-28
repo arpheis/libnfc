@@ -324,8 +324,8 @@ main(int argc, char *argv[])
     azt00[1] = i;	  
     iso14443a_crc_append(azt00,3);
     if(transmit_bytes(azt00,5)){
-      memcpy(bloc, abtRx, 8);
-      fwrite(bloc,8,1,fdump);
+      memcpy(abtAts, abtRx, szRx-2);
+      fwrite(abtAts,8,1,fdump);
     }
   }
 
